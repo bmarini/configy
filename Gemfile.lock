@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    configy (1.1.0)
+    configy (1.1.1)
       hashie (~> 1.2.0)
 
 GEM
