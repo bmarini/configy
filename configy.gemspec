@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name     = "configy"
   s.version  = "1.1.1"
 
-  s.authors  = [ "Gabe Varela", "Ben Marini", "Chip Miller" ]
+  s.authors  = [ "Gabe Varela", "Ben Marini", "Chip Miller", "Bram Swenson" ]
   s.date     = "2012-03-18"
   s.email    = "bmarini@gmail.com"
   s.summary  = "Simple yaml driven configuration gem"

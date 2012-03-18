@@ -56,6 +56,7 @@ It doesn't allow to change the values in the application code, BTW.
 * Gabe Varela
 * Ben Marini
 * Chip Miller
+* Bram Swenson
 
 ## History
 
