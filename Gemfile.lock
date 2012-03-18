@@ -1,16 +1,15 @@
 PATH
   remote: .
   specs:
-    configy (0.0.4)
+    configy (1.0.1)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    minitest (2.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (>= 1.0.0)
   configy!
-  minitest (~> 2.1.0)
