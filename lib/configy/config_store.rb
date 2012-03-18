@@ -1,3 +1,5 @@
+require 'hashie/mash'
+
 unless Hash.new.respond_to?(:deep_merge)
   class Hash
     # Returns a new hash with +self+ and +other_hash+ merged recursively.
@@ -24,7 +26,7 @@ module Configy
 
     # Takes a Hash as input
     def initialize(config)
-      @config = config && config.to_hash || {}
+      @config = Hashie::Mash.new( config && config.to_hash || {} )
     end
 
     # Returns a new ConfigStore by merging `common` with `section`
