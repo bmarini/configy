@@ -1,7 +1,7 @@
-require 'test_helper'
+require 'spec_helper'
 require 'erb'
 
-class ConfigFileTest < MiniTest::Unit::TestCase
+describe Configy::Base do
   MAIN_CONFIG = <<-EOS
 common:
   a: 1
@@ -23,40 +23,40 @@ special:
   e: <%= 6 * 7 %>
   EOS
 
-  def test_top_level_configs_should_be_accesssible_as_methods
+  it "test top level configs should be accesssible as methods" do
     with_config_file(MAIN_CONFIG, 'config') do
       config = Configy::Base.new('config', 'special', scratch_dir)
-      assert_equal 1, config.a
+      config.a.must_equal 1
     end
   end
 
-  def test_method_missing
+  it "test method missing" do
     config = Configy::Base.new('config', 'special', scratch_dir)
     assert_raises NoMethodError do
       config.nope = "oops"
     end
   end
 
-  def test_should_override_params_with_another_file_and_use_proper_section
+  it "test should override params with another file and use proper section" do
     with_config_file(MAIN_CONFIG, 'config') do
       with_config_file(LOCAL_CONFIG, 'config.local') do
         config = Configy::Base.new('config', 'special', scratch_dir)
-        assert_equal '2', config.a
-        assert_equal 8,   config.b
-        assert_equal 2,   config.c
-        assert_equal 6,   config.d
-        assert_equal 42,  config.e
+        config.a.must_equal '2'
+        config.b.must_equal 8
+        config.c.must_equal 2
+        config.d.must_equal 6
+        config.e.must_equal 42
       end
     end
   end
 
-  def test_should_reload_a_config_file_if_changed
+  it "test should reload a config file if changed" do
     with_config_file({ 'common' => {'a' => 'foo'} }, 'config') do |file1, hash1|
       with_config_file({ 'special' => {'b' => 'bar'} }, 'config.local') do |file2, hash2|
 
         config = Configy::Base.new('config', 'special', scratch_dir)
-        assert_equal 'foo', config.a
-        assert_equal 'bar', config.b
+        config.a.must_equal 'foo'
+        config.b.must_equal 'bar'
 
         # Simulate 1 second going by
         config.send(:config).mtime -= 1
@@ -65,7 +65,7 @@ special:
           f.puts( {'common' => {'a' => 'foo*'} }.to_yaml )
         end
 
-        assert_equal 'foo*', config.a
+        config.a.must_equal 'foo*'
 
         # Simulate 1 second going by
         config.send(:config).mtime -= 1
@@ -74,19 +74,19 @@ special:
           f.puts( {'special' => {'b' => 'bar*'} }.to_yaml )
         end
 
-        assert_equal 'bar*', config.b
+        config.b.must_equal 'bar*'
 
       end
     end
   end
 
-  def test_should_not_reload_a_config_file_if_changed_and_cache_config_is_true
+  it "test should not reload a config file if changed and cache config is true" do
     with_config_file({ 'common' => {'a' => 'foo'} }, 'config') do |file1, hash1|
       with_config_file({ 'special' => {'b' => 'bar'} }, 'config.local') do |file2, hash2|
 
         config = Configy::Base.new('config', 'special', scratch_dir, true)
-        assert_equal 'foo', config.a
-        assert_equal 'bar', config.b
+        config.a.must_equal 'foo'
+        config.b.must_equal 'bar'
 
         # Simulate 1 second going by
         config.send(:config).mtime -= 1
@@ -95,7 +95,7 @@ special:
           f.puts( {'common' => {'a' => 'foo*'} }.to_yaml )
         end
 
-        assert_equal 'foo', config.a
+        config.a.must_equal 'foo'
 
         # Simulate 1 second going by
         config.send(:config).mtime -= 1
@@ -104,7 +104,7 @@ special:
           f.puts( {'special' => {'b' => 'bar*'} }.to_yaml )
         end
 
-        assert_equal 'bar', config.b
+        config.b.must_equal 'bar'
 
       end
     end

@@ -1,27 +1,28 @@
-require 'test_helper'
+require 'spec_helper'
 
-class ConfigFileTest < MiniTest::Unit::TestCase
-  def test_should_load_a_config_from_a_file
+describe Configy::ConfigFile do
+
+  it "test should load a config from a file" do
     with_config_file( { 'common' => {'a' => '1', 'b' => '2' } }, 'app_config' ) do |file, hash|
       configfile = Configy::ConfigFile.new(file, 'development')
-      assert_equal hash, configfile.load_file
+      configfile.load_file.must_equal hash
     end
   end
 
-  def test_should_create_an_instance_of_config_store
+  it "test should create an instance of config store" do
     with_config_file( { 'common' => {'a' => '1', 'b' => '2' } }, 'app_config' ) do |file, hash|
       configfile = Configy::ConfigFile.new(file, 'development')
-      assert_instance_of Configy::ConfigStore, configfile.config
+      configfile.config.must_be_instance_of Configy::ConfigStore
     end
   end
 
-  def test_should_be_aware_of_a_files_mtime
+  it "test should be aware of a files mtime" do
     configfile = Configy::ConfigFile.new('nonexistent/file', 'development')
-    assert_equal Time.at(0), configfile.mtime
+    configfile.mtime.must_equal Time.at(0)
 
     with_config_file( { 'common' => {'a' => '1', 'b' => '2' } }, 'app_config' ) do |file, hash|
       configfile = Configy::ConfigFile.new(file, 'development')
-      assert_equal File.mtime(file), configfile.mtime
+      configfile.mtime.must_equal File.mtime(file)
     end
   end
 

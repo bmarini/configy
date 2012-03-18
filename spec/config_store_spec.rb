@@ -1,13 +1,14 @@
-require 'test_helper'
+require 'spec_helper'
 
-class ConfigStoreTest < MiniTest::Unit::TestCase
-  def test_should_initialize_with_a_hash
+describe Configy::ConfigStore do
+
+  it "test should initialize with a hash" do
     hash   = {'common' => {'a' => 1, 'b' => 2} }
     config = Configy::ConfigStore.new(hash)
-    assert_equal hash, config.to_hash
+    config.to_hash.must_equal hash
   end
 
-  def test_should_compile_a_selected_section_with_the_common_section
+  it "test_should_compile_a_selected_section_with_the_common_section" do
     hash1 = {
       'common'      => { 'a' => "A",  'b' => "B" },
       'development' => { 'a' => "A*", 'c' => "C" }
@@ -15,12 +16,12 @@ class ConfigStoreTest < MiniTest::Unit::TestCase
 
     config = Configy::ConfigStore.new(hash1).compile('development')
 
-    assert_equal "A*", config['a']
-    assert_equal "B",  config['b']
-    assert_equal "C",  config['c']
+    config['a'].must_equal "A*"
+    config['b'].must_equal "B"
+    config['c'].must_equal "C"
   end
 
-  def test_should_merge_two_configs_together
+  it "test should merge two configs together" do
     hash1 = {
       'common'      => { 'a' => "A",  'b' => "B", 'c' => "C" },
       'development' => { 'a' => "A*", 'c' => "C*", 'd' => "D", 'e' => "E" }
@@ -35,15 +36,15 @@ class ConfigStoreTest < MiniTest::Unit::TestCase
     config2 = Configy::ConfigStore.new(hash2).compile('development')
     config  = config1.merge(config2)
 
-    assert_equal "A*",  config['a']
-    assert_equal "B",   config['b']
-    assert_equal "C**", config['c']
-    assert_equal "D",   config['d']
-    assert_equal "E*",  config['e']
-    assert_equal "F",   config['f']
+    config['a'].must_equal "A*"
+    config['b'].must_equal "B"
+    config['c'].must_equal "C**"
+    config['d'].must_equal "D"
+    config['e'].must_equal "E*"
+    config['f'].must_equal "F"
   end
 
-  def test_should_raise_an_exception_if_config_is_missing
+  it "test should raise an exception if config is missing" do
     assert_raises Configy::ConfigParamNotFound do
       Configy::ConfigStore.new({})['oops']
     end
