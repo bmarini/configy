@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "configy"
-  s.version  = "1.1.0"
+  s.version  = "1.1.1"
 
   s.authors  = [ "Gabe Varela", "Ben Marini", "Chip Miller" ]
   s.date     = "2012-03-18"
