@@ -1,3 +1,7 @@
+## 1.1.2 (2012-03-30)
+
+* If CONFIGY_ENV is set, use that to determine config section to use.
+
 ## 1.1.1 (2012-03-18)
 
 * Allow Configy to define configs within other modules
