@@ -1,21 +1,27 @@
 # EXAMPLE:
-# common:
+# common: &common
 #   admin_email: admin@domain.com
 #   xml_rpc_url: http://domain.com:8000/
 #   media_path: <%%= Rails.root %>/tmp/media
-# 
+#
 # development:
+#   <<: *common
 #   xml_rpc_url: http://localhost:8000/
-# 
+#
 # test:
+#   <<: *common
 #   xml_rpc_url: http://localhost:8008/
 
-common:
+common: &common
 
 development:
+  <<: *common
 
 test:
+  <<: *common
 
 production:
+  <<: *common
 
 #custom_environment:
+# <<: *common
