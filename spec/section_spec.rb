@@ -9,10 +9,16 @@ describe "Configy.section" do
     Configy.section.must_equal "development"
   end
 
+  it "should detect configy environment" do
+    with_const( :CONFIGY_ENV, "staging" ) do
+      Configy.section.must_equal "staging"
+    end
+  end
+
   it "should detect rails 3 environment" do
     rails3_obj = MiniTest::Mock.new
     rails3_obj.expect :env, "staging"
-  
+
     with_const(:Rails, rails3_obj) do
       Configy.section.must_equal "staging"
     end
