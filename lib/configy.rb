@@ -26,6 +26,8 @@ module Configy
     def section
       if @section
         @section
+      elsif defined? CONFIGY_ENV
+        CONFIGY_ENV
       elsif defined? Rails
         Rails.env
       elsif defined? RAILS_ENV
