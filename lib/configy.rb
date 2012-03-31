@@ -14,29 +14,17 @@ module Configy
         @load_path
       elsif defined? Rails
         Rails.root.join("config")
-      elsif defined? RAILS_ROOT
-        "#{RAILS_ROOT}/config"
-      elsif defined? RACK_ROOT
-        "#{RACK_ROOT}/config"
+      elsif ENV['RAILS_ROOT']
+        "#{ENV['RAILS_ROOT']}/config"
+      elsif ENV['RACK_ROOT']
+        "#{ENV['RACK_ROOT']}/config"
       else
         'config'
       end
     end
 
     def section
-      if @section
-        @section
-      elsif defined? CONFIGY_ENV
-        CONFIGY_ENV
-      elsif defined? Rails
-        Rails.env
-      elsif defined? RAILS_ENV
-        RAILS_ENV
-      elsif defined? RACK_ENV
-        RACK_ENV
-      else
-        'development'
-      end
+      @section ||= ENV["CONFIGY_ENV"] || ENV["RAILS_ENV"] || ENV["RACK_ENV"] || "development"
     end
 
     def cache_config
