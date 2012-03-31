@@ -1,6 +1,11 @@
+## 1.1.3 (2012-03-31)
+
+* Allow hash access from main config object
+* Check environment variables instead of constants
+
 ## 1.1.2 (2012-03-30)
 
-* If CONFIGY_ENV is set, use that to determine config section to use.
+* If ENV['CONFIGY_ENV'] is set, use that to determine config section to use.
 
 ## 1.1.1 (2012-03-18)
 
