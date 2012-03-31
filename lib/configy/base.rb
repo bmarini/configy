@@ -18,6 +18,10 @@ module Configy
       end
     end
 
+    def [](key)
+      config[key]
+    end
+
     def reload
       @config = config_file.config.merge(local_config_file.config).tap do |c|
         c.mtime = most_recent_mtime
