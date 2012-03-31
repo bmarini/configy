@@ -35,6 +35,12 @@ module Configy::TestHelpers
     Object.send :remove_const, const
   end
 
+  def with_env(name, value)
+    old = ENV[name]
+    ENV[name] = value
+    yield
+    ENV[name] = old
+  end
 end
 
 class MiniTest::Unit::TestCase

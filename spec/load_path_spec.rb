@@ -19,14 +19,14 @@ describe "Configy.load_path" do
   end
 
   it "should detect rails 2 config dir" do
-    with_const( :RAILS_ROOT, "path/to/rails/root" ) do
-      Configy.load_path.must_equal "#{RAILS_ROOT}/config"
+    with_env( "RAILS_ROOT", "path/to/rails/root" ) do
+      Configy.load_path.must_equal "#{ENV['RAILS_ROOT']}/config"
     end
   end
 
   it "should detect rack config dir" do
-    with_const( :RACK_ROOT, "path/to/rack/root" ) do
-      Configy.load_path.must_equal "#{RACK_ROOT}/config"
+    with_env( "RACK_ROOT", "path/to/rack/root" ) do
+      Configy.load_path.must_equal "#{ENV['RACK_ROOT']}/config"
     end
   end
 end

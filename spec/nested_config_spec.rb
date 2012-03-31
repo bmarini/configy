@@ -7,7 +7,7 @@ describe Configy do
       Configy.cache_config = nil
     end
 
-    it "should be accessbile as methods" do
+    it "should be accessbile as methods or hashes" do
       with_config_file({
         'common' => {
           'level1' => {
@@ -20,6 +20,7 @@ describe Configy do
         }
       }, 'nested_config') do
         Configy.create('nested_config')
+        NestedConfig['level1']['level2']['level3'].must_equal "whynot"
         NestedConfig.level1.level2.level3.must_equal "whynot"
         NestedConfig.level1.level2.nokey?.must_equal false
         NestedConfig.level1.level2.falsekey?.must_equal false

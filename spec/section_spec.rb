@@ -10,28 +10,19 @@ describe "Configy.section" do
   end
 
   it "should detect configy environment" do
-    with_const( :CONFIGY_ENV, "staging" ) do
+    with_env( "CONFIGY_ENV", "staging" ) do
       Configy.section.must_equal "staging"
     end
   end
 
-  it "should detect rails 3 environment" do
-    rails3_obj = MiniTest::Mock.new
-    rails3_obj.expect :env, "staging"
-
-    with_const(:Rails, rails3_obj) do
-      Configy.section.must_equal "staging"
-    end
-  end
-
-  it "should detect rails 2 environment" do
-    with_const( :RAILS_ENV, "test" ) do
+  it "should detect rails environment" do
+    with_env( "RAILS_ENV", "test" ) do
       Configy.section.must_equal "test"
     end
   end
 
   it "should detect rack environment" do
-    with_const( :RACK_ENV, "production" ) do
+    with_env( "RACK_ENV", "production" ) do
       Configy.section.must_equal "production"
     end
   end
