@@ -1,10 +1,13 @@
 # For local development
 # These values will overrides the application's configuration (config/app_config.yml)
 
-common:
+common: &common
 
 development:
+  <<: *common
 
 test:
+  <<: *common
 
 #custom_local_environment:
+# <<: *common
