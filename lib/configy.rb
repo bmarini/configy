@@ -2,6 +2,7 @@ module Configy
   autoload :Base, 'configy/base'
   autoload :ConfigFile, 'configy/config_file'
   autoload :ConfigStore, 'configy/config_store'
+  autoload :StringInquirer, 'configy/string_inquirer'
 
   class ConfigyError < StandardError; end
   class ConfigParamNotFound < ConfigyError; end
