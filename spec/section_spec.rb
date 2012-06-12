@@ -31,4 +31,19 @@ describe "Configy.section" do
     Configy.section = "custom"
     Configy.section.must_equal "custom"
   end
+
+  describe "string inquiry" do
+    before do
+      Configy.section = nil
+      Configy.section.must_equal "development"
+    end
+
+    it "should be development?" do
+      Configy.section.development?.must_equal true
+    end
+
+    it "should not be staging?" do
+      Configy.section.staging?.must_equal false
+    end
+  end
 end
