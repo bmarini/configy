@@ -8,7 +8,7 @@ module Configy
   class ConfigParamNotFound < ConfigyError; end
 
   class << self
-    attr_writer :load_path, :section, :cache_config
+    attr_writer :load_path, :cache_config
 
     def load_path
       if @load_path
@@ -25,12 +25,22 @@ module Configy
     end
 
     def section
-      @section ||= ENV["CONFIGY_ENV"] || ENV["RAILS_ENV"] || ENV["RACK_ENV"] || "development"
+      @section ||= Configy::StringInquirer.new(section_string)
+    end
+
+    def section=( value )
+      @section = value.is_a?(String) ? Configy::StringInquirer.new(value) : value
     end
 
     def cache_config
       @cache_config = false if @cache_config.nil?
       @cache_config
+    end
+
+    protected
+
+    def section_string
+      ENV["CONFIGY_ENV"] || ENV["RAILS_ENV"] || ENV["RACK_ENV"] || "development"
     end
   end
 
