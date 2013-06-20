@@ -2,12 +2,12 @@ PATH
   remote: .
   specs:
     configy (1.1.3)
-      hashie (~> 1.2.0)
+      hashie
 
 GEM
   remote: http://rubygems.org/
   specs:
-    hashie (1.2.0)
+    hashie (2.0.5)
     minitest (2.5.1)
 
 PLATFORMS
