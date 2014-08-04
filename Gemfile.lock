@@ -9,6 +9,7 @@ GEM
   specs:
     hashie (2.1.2)
     minitest (2.5.1)
+    rake (10.3.2)
 
 PLATFORMS
   ruby
@@ -17,3 +18,4 @@ DEPENDENCIES
   bundler (>= 1.0.0)
   configy!
   minitest (= 2.5.1)
+  rake
