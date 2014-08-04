@@ -1,4 +1,10 @@
 rvm:
-  - 1.8.7
-  - 1.9.2
-  - ree
+  - 1.9.3
+  - 2.1.0
+gemfile:
+  - Gemfile
+  - gemfiles/hashie1_2.gemfile
+  - gemfiles/hashie2_1.gemfile
+before_script:
+  - unset RACK_ENV
+  - unset RAILS_ENV
