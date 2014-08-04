@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "minitest", "2.5.1"
   s.add_development_dependency "rake"
+  s.add_development_dependency "rdoc"
 
   s.extra_rdoc_files = [
     "LICENSE",
