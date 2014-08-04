@@ -1,3 +1,7 @@
+## 1.2.0 (2014-08-04)
+
+* Loosen version requirement for hashie
+
 ## 1.1.3 (2012-03-31)
 
 * Allow hash access from main config object
