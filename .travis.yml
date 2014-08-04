@@ -6,3 +6,5 @@ gemfile:
   - Gemfile
   - gemfiles/hashie1_2.gemfile
   - gemfiles/hashie2_1.gemfile
+before_script:
+  - export
