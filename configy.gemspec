@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.add_runtime_dependency "hashie", [">= 1.2", "< 3.0"]
+  s.add_runtime_dependency "hashie"
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "minitest", "2.5.1"
   s.add_development_dependency "rake"
