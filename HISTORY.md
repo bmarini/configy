@@ -1,3 +1,7 @@
+## 1.2.1 (2017-06-26)
+
+* Loosen hashie version constraint further (thanks @stephenprater)
+
 ## 1.2.0 (2014-08-04)
 
 * Loosen version requirement for hashie
